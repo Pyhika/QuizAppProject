@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block header %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Create</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" %}">
+    <link rel="stylesheet" href="{% static "https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" %}">
+    <link rel="stylesheet" href="{% static "history/fonts/font-awesome.min.css" %}">
+{% endblock header %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    <header class="masthead" style="background-image:url('{% static "history/img/contact-bg.jpg" %}');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <div class="site-heading">
+                        <h1>Create History</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto">
+                <p>今日の学びは？</p>
+                <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="hidden" name="author" value="{{ user.id }}">
+                    <input type="submit" value="AIエンジニアに近づきました">
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <script src="{% static "history/js/jquery.min.js" %}"></script>
+    <script src="{% static "history/js/script.min.js" %}"></script>
+    {% else %}
+        ログインしてください
+        <a href="{% url "login" %}" class="btn btn-primary" role="button" aria-pressed="true">ログイン</a>
+    {% endif %}
+{% endblock content %}

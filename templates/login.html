@@ -1,0 +1,24 @@
+{% extends "base.html"%}
+
+{% block header %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>signup</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "login/fonts/ionicons.min.css" %}">
+    <link rel="stylesheet" href="{% static "login/css/styles.min.css" %}">
+{% endblock header %}
+
+{% block content %}
+    <div class="login-dark">
+        <form method="post">{% csrf_token %}
+            <h2 class="sr-only">Login Form</h2>
+            <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+            <div class="form-group"><input class="form-control" type="text" name="username_data" placeholder="Username" required></div>
+            <div class="form-group"><input class="form-control" type="password" name="password_data" placeholder="Password" required></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div>
+            <a class="forgot" href="{% url 'signup' %}">Do you create your account?</a>
+        </form>
+    </div>
+    <script src="{% static "login/js/jquery.min.js" %}"></script>
+{% endblock content %}

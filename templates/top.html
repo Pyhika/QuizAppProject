@@ -1,0 +1,58 @@
+{% extends "base.html"%}
+
+{% block header %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>quiz_list</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "top/fonts/font-awesome.min.css" %}">
+    <link rel="stylesheet" href="{% static "top/css/styles.min.css" %}">
+{% endblock header %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <header>
+        <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
+            <div class="container"><a class="navbar-brand" href="#">Learning</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'list_history' %}">History</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://products.sint.co.jp/aisia/blog">New AI Info</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'list_quiz' %}">Quiz</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">About Me</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+                    <form class="form-inline mr-auto" target="_self">
+                        <div class="form-group"><label for="search-field"></label></div>
+                    </form><i class="fa fa-search"></i><input type="search" id="search-field" class="search-field" name="search"><a class="btn btn-light action-button" role="button" href="#">Search&nbsp;</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="article-list">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Python Expert</h2>
+                <p class="text-center">日々の勉強の記録と効率的な学習が行えます。<br>そして、AIに関する詳報を取得するサイトです。</p>
+            </div>
+            <div class="row articles">
+                <div class="col-sm-6 col-md-4 item"><a href="#"><img class="img-fluid" src="{% static 'top/img/desk.jpg' %}" alt=""></a>
+                    <h3 class="name">Article Title</h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.</p><a class="action" href="#"><i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+                <div class="col-sm-6 col-md-4 item"><a href="#"><img class="img-fluid" src="{% static 'top/img/building.jpg' %}" alt=""></a>
+                    <h3 class="name">Article Title</h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.</p><a class="action" href="#"><i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+                <div class="col-sm-6 col-md-4 item"><a href="#"><img class="img-fluid" src="{% static 'top/img/loft.jpg' %}" alt=""></a>
+                    <h3 class="name">Article Title</h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.</p><a class="action" href="#"><i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static "top/js/jquery.min.js" %}"></script>{% else %}
+    ログインしてください
+    <a href="{% static "login" %}" class="btn btn-primary" role="button" aria-pressed="true">ログイン</a>
+{% endif %}
+{% endblock content %}
+

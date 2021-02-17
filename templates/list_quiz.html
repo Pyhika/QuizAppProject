@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block header %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Learn history</title>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>quiz</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Document</title>
+{% endblock header %}
+
+{% block content %}
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container"><a class="navbar-brand" href="{% url 'top' %}">Learn</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'top' %}">Top</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'create_history' %}">Create History</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="masthead" style="background-image:url('{% static "history/img/home-bg.jpg" %}');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <div class="site-heading">
+                        <h1>Let's Quiz</h1><span class="subheading">Start Artificial Intelligence</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-lg-8">
+                {# 記事内容#}
+                <div class="py-2">
+                    <div class="container mb-5">
+                        <div class="accordion" id="collapse-accordion">
+                            <div class="card mb-2">
+                                {% for quiz in quiz_object_list %}
+                                <div class="card-header" id="heading{{ quiz.id }}">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse-accordion-{{ quiz.pk }}">
+                                            Q{{ quiz.id }} {{ quiz.question }}
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapse-accordion-{{ quiz.pk }}" class="collapse" data-parent="#collapse-accordion">
+                                    <div class="card-body">
+                                        {{ quiz.answer }}
+                                        <br/>
+                                        <br/>
+                                        <a href="{% url 'delete_quiz' quiz.pk %}">
+                                            <button type="button" class="btn btn-primary">
+                                                Delete?
+                                            </button>
+                                        </a>
+                                        <a href="{% url 'update_quiz' quiz.pk %}">
+                                            <button type="button" class="btn btn-primary">
+                                                Update?
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <div class="clearfix"><a href="{% url 'create_quiz' %}"><button class="btn btn-primary float-right" type="button">Create&nbsp;⇒</button></a></div>
+    <div class="clearfix"><a href="{% url 'top' %}"><button class="btn btn-primary float-right" type="button">Topへ&nbsp;⇒</button></a></div>
+{% endblock content %}

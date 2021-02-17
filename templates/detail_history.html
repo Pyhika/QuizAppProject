@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block header %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Learn history</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" %}">
+    <link rel="stylesheet" href="{% static "https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" %}">
+    <link rel="stylesheet" href="{% static "history/fonts/font-awesome.min.css" %}">
+{% endblock header %}
+
+{% block content %}
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container"><a class="navbar-brand" href="top.html">Learn</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'top' %}">Top</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'create_history' %}">Create History</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="masthead" style="background-image:url('{% static "history/img/home-bg.jpg" %}');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <div class="site-heading">
+                        <h1>Learn History</h1><span class="subheading">Start Artificial Intelligence</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-lg-8">
+                {# 記事内容#}
+                <div class="post-preview">
+                        <p class="post-meta">記入日：{{ history_object.postdate }}</p>
+                        <p class="post-meta">カテゴリ：{{ history_object.category }}</p>
+                        <p class="post-meta">記入者：{{ history_object.author }}</p>
+                        <p class="post-title">タイトル：{{ history_object.title }}</p>
+                        <p class="post-subtitle">概要：{{ history_object.summary }}</p>
+                        <P class="post-subtitle">内容：{{ history_object.content }}</P>
+                        {% if history_object.images.url is not NONE %}
+                            <p class="post-subtitle"><img src="{{ history_object.images.url }}" alt="admin_error" width="720"></p>
+                        {% endif %}
+                </div>
+                <hr>
+                <div class="clearfix"><a href="{% url 'delete_history' history_object.pk %}"><button class="btn btn-primary float-left" type="button">削除&nbsp;⇒</button></a></div>
+                <div class="clearfix"><a href="{% url 'update_history' history_object.pk %}"><button class="btn btn-primary float-right" type="button">編集&nbsp;⇒</button></a></div>
+                <div class="clearfix"><a href="{% url 'list_history' %}"><button class="btn btn-primary float-right" type="button">戻る&nbsp;⇒</button></a></div>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="{% static "history/js/jquery.min.js" %}"></script>
+    <script src="{% static "history/js/script.min.js" %}"></script>
+{% endblock content %}
