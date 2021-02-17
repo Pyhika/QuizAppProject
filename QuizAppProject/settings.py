@@ -120,4 +120,4 @@ STATICFILES_DIRS = [Path(BASE_DIR / 'static')]
 
 LOGIN_URL = '/login/'
 
-STATICFILES_STORAGE = 'whitenoise.storages.CompressedMonifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
